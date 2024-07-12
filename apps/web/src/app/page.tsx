@@ -4,25 +4,21 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Send } from '@mui/icons-material';
 import { Box, TextField, Typography } from '@mui/material';
 import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { type User, userSchema } from '../shared/schemas/user-schema';
-import { useStorage } from '../shared/hooks/useStorage';
+import { usePaymentContext } from '../shared/hooks/usePaymentContext';
 
 export default function Home() {
-  const { setUser } = useStorage();
-  const router = useRouter();
+  const { updateUser } = usePaymentContext();
 
   const form = useForm<User>({
     resolver: zodResolver(userSchema),
   });
 
   const handleOnSubmit = async (data: User) => {
-    setTimeout(() => {
-      setUser(data);
-      router.push('/select-amount');
-    }, 1000);
+    updateUser(data);
   };
+
   return (
     <MainContent alignCenter>
       <Box component="form" onSubmit={form.handleSubmit(handleOnSubmit)}>

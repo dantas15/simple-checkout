@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import 'dayjs/locale/pt-br';
+import { PaymentProvider } from '../shared/contexts/payment-context';
 
 type Props = {
   children: ReactNode;
@@ -11,7 +12,7 @@ type Props = {
 export function ClientProviders({ children }: Props) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
-      {children}
+      <PaymentProvider>{children}</PaymentProvider>
     </LocalizationProvider>
   );
 }

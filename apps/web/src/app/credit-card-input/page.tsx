@@ -10,16 +10,32 @@ import {
   CreditCard,
   creditCardSchema,
 } from '../../shared/schemas/credit-card-schema';
-import { useStorage } from '../../shared/hooks/useStorage';
 import { PaymentInfo } from './components/payment-info';
+import { useEffect } from 'react';
+import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
+import { useRouter } from 'next/navigation';
 
 export default function CreditCardInput() {
+  const router = useRouter();
   const form = useForm<CreditCard>({
     resolver: zodResolver(creditCardSchema),
   });
 
-  const { getUser } = useStorage();
-  const name = getUser().name;
+  const { user, amount, isLoading } = usePaymentContext();
+
+  useEffect(() => {
+    if (!isLoading && (!user || !amount)) {
+      if (!user) {
+        router.replace('/');
+      }
+      if (!amount) {
+        router.replace('/select-amount');
+      }
+    }
+  }, [user, amount, isLoading]);
+
+  const name = user?.name;
+  const amountInCents = amount?.amount ?? 0;
 
   return (
     <MainContent>
@@ -69,7 +85,10 @@ export default function CreditCardInput() {
           Pagar
         </SubmitButton>
       </Stack>
-      <PaymentInfo />
+      <PaymentInfo
+        firstAmount={amountInCents / 2}
+        secondAmount={amountInCents / 2}
+      />
     </MainContent>
   );
 }

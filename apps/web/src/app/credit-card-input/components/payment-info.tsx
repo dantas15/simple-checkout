@@ -14,7 +14,12 @@ import { FAQ } from '@simple-checkout/ui/components';
 
 import dayjs from 'dayjs';
 
-export function PaymentInfo() {
+type Props = {
+  firstAmount: number;
+  secondAmount: number;
+};
+
+export function PaymentInfo({ firstAmount, secondAmount }: Props) {
   return (
     <>
       <Stack pt={4} alignItems="center">
@@ -43,10 +48,10 @@ export function PaymentInfo() {
         </div>
         <Stack justifyContent="space-around" alignItems="center" height={100}>
           <Typography variant="body1" fontWeight={700}>
-            R$123
+            R${firstAmount}
           </Typography>
           <Typography variant="body1" fontWeight={700}>
-            R$321
+            R${secondAmount}
           </Typography>
         </Stack>
       </Stack>
