@@ -1,4 +1,5 @@
 import { Box, CircularProgress } from '@mui/material';
+import { minContentHeight } from '@simple-checkout/ui';
 
 export default function Loading() {
   return (
@@ -7,7 +8,7 @@ export default function Loading() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        height: minContentHeight,
       }}
     >
       <CircularProgress />

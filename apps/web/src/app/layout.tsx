@@ -7,6 +7,7 @@ import { theme } from '@simple-checkout/ui';
 import { Suspense } from 'react';
 import Loading from './loading';
 import { ClientProviders } from './client-providers';
+import { MainWrapper } from '@simple-checkout/ui/components';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -28,7 +29,9 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <ClientProviders>
               <CssBaseline />
-              <Suspense fallback={<Loading />}>{children}</Suspense>
+              <MainWrapper>
+                <Suspense fallback={<Loading />}>{children}</Suspense>
+              </MainWrapper>
             </ClientProviders>
           </ThemeProvider>
         </AppRouterCacheProvider>
