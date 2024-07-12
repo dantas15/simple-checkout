@@ -4,14 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Send } from '@mui/icons-material';
 import {
   Box,
-  Button,
-  CircularProgress,
   FormControl,
   InputAdornment,
   TextField,
   Typography,
 } from '@mui/material';
-import { MainWrapper } from '@simple-checkout/ui/components';
+import { MainWrapper, SubmitButton } from '@simple-checkout/ui/components';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -62,26 +60,9 @@ export default function Home() {
               placeholder="0.0"
             />
           </FormControl>
-          <Button
-            type="submit"
-            disabled={isLoading}
-            variant="contained"
-            startIcon={<Send />}
-          >
+          <SubmitButton startIcon={<Send />} isLoading={isLoading}>
             Enviar
-            {isLoading && (
-              <CircularProgress
-                size={24}
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  marginTop: '-12px',
-                  marginLeft: '-12px',
-                }}
-              />
-            )}
-          </Button>
+          </SubmitButton>
         </Box>
       </form>
     </MainWrapper>
