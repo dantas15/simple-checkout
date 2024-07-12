@@ -4,6 +4,8 @@ import { Nunito } from 'next/font/google';
 import './globals.css';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { theme } from '@simple-checkout/ui';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -24,7 +26,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {children}
+            <Suspense fallback={<Loading />}>{children}</Suspense>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
