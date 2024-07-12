@@ -54,6 +54,7 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
     setIsLoading(true);
     setCreditCard(data);
     setIsLoading(false);
+    router.push('/upfront-payment');
   };
 
   return (

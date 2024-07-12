@@ -14,14 +14,36 @@ import { PaymentInfo } from './components/payment-info';
 import { useEffect } from 'react';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
 import { useRouter } from 'next/navigation';
+import { SelectInstallments } from './components/select-installments';
+
+type Installment = {
+  value: number;
+  label: string;
+};
+const fetchMockInstallments = (transactionAmount: number): Installment[] => {
+  const mockInstallments: Installment[] = [];
+  const mockFee = 0.25;
+  for (let i = 0; i < 12; i++) {
+    const installment = i + 1;
+    const totalWithFees = transactionAmount + i * mockFee * transactionAmount;
+    mockInstallments.push({
+      value: installment,
+      label: `Parcele em ${installment}x de ${totalWithFees}`,
+    });
+  }
+  return mockInstallments;
+};
 
 export default function CreditCardInput() {
   const router = useRouter();
   const form = useForm<CreditCard>({
     resolver: zodResolver(creditCardSchema),
+    defaultValues: {
+      selectedInstallment: 1,
+    },
   });
 
-  const { user, amount, isLoading } = usePaymentContext();
+  const { user, amount, isLoading, updateCreditCard } = usePaymentContext();
 
   useEffect(() => {
     if (!isLoading && (!user || !amount)) {
@@ -34,8 +56,14 @@ export default function CreditCardInput() {
     }
   }, [user, amount, isLoading]);
 
-  const name = user?.name;
+  const name = user?.name ?? '';
   const amountInCents = amount?.amount ?? 0;
+
+  const handleOnSubmit = (data: CreditCard) => {
+    updateCreditCard(data);
+  };
+
+  const availableInstallments = fetchMockInstallments(amountInCents);
 
   return (
     <MainContent>
@@ -44,7 +72,7 @@ export default function CreditCardInput() {
       </Typography>
       <Stack
         component="form"
-        onSubmit={form.handleSubmit((data) => console.log(data))}
+        onSubmit={form.handleSubmit(handleOnSubmit)}
         gap={2}
       >
         <TextField
@@ -81,6 +109,11 @@ export default function CreditCardInput() {
             helperText={form.formState.errors.securityNumber?.message}
           />
         </Stack>
+
+        <SelectInstallments
+          form={form}
+          installmentOptions={availableInstallments}
+        />
         <SubmitButton color="secondary" fullWidth isLoading={false}>
           Pagar
         </SubmitButton>

@@ -32,6 +32,7 @@ export const creditCardSchema = z.object({
     .refine((cvv) => !isNaN(Number(cvv)), 'CVV é composto por números'),
   selectedInstallment: z
     .number({ message: 'Parcelas deve ser um número válido' })
+    .int()
     .min(1, { message: 'Escolha uma parcela' }),
 });
 
