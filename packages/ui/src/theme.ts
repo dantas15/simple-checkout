@@ -8,7 +8,7 @@ const muteColor = '#c1c1c1';
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'Inter, Arial, sans-serif',
+    fontFamily: 'Nunito, Arial, sans-serif',
   },
   palette: {
     primary: {

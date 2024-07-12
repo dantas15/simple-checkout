@@ -9,7 +9,10 @@ import Loading from './loading';
 import { ClientProviders } from './client-providers';
 import { MainWrapper } from '@simple-checkout/ui/components';
 
-const font = Nunito({ subsets: ['latin'] });
+const font = Nunito({
+  weight: ['300', '400', '500', '700'],
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: 'Checkout simples',

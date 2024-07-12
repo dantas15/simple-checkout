@@ -1,4 +1,3 @@
-import { Send } from '@mui/icons-material';
 import type { ButtonProps } from '@mui/material';
 import { Button, CircularProgress } from '@mui/material';
 
@@ -6,9 +5,15 @@ type Props = {
   isLoading: boolean;
 } & Partial<ButtonProps>;
 
-export function SubmitButton({ isLoading, ...props }: Props) {
+export function SubmitButton({ isLoading, sx, ...props }: Props) {
   return (
-    <Button type="submit" disabled={isLoading} variant="contained" {...props}>
+    <Button
+      type="submit"
+      disabled={isLoading}
+      variant="contained"
+      {...props}
+      sx={{ textTransform: 'none', fontWeight: 500, ...sx }}
+    >
       {props.children}
       {isLoading && (
         <CircularProgress
