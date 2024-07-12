@@ -27,6 +27,7 @@
     "@fontsource/inter": "^5.0.19",
     "@mui/icons-material": "^5.16.1",
     "@mui/material": "^5.16.1",
+    "next-qrcode": "^2.5.1",
     "react": "^18.2.0"
   }
 }

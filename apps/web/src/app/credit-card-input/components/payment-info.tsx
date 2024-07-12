@@ -5,12 +5,11 @@ import {
   Divider,
   Stack,
   Step,
-  StepIcon,
   StepLabel,
   Stepper,
   Typography,
 } from '@mui/material';
-import { FAQ } from '@simple-checkout/ui/components';
+import { FAQ, StepIcon } from '@simple-checkout/ui/components';
 
 import dayjs from 'dayjs';
 

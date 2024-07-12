@@ -14,27 +14,13 @@ const CustomStepIconRoot = styled('div')<{ ownerState: { active?: boolean } }>(
       color: primaryColor,
     }),
     fontSize: 18,
-    '& .CustomStepIconRoot-completedIcon': {
-      color: theme.palette.primary,
-      zIndex: 1,
-    },
-    '& .CustomStepIconRoot-circle': {
-      width: 8,
-      height: 8,
-      borderRadius: '50%',
-      backgroundColor: 'currentColor',
-    },
   })
 );
 
 export function StepIcon({ active, completed, className }: StepIconProps) {
   return (
     <CustomStepIconRoot ownerState={{ active }} className={className}>
-      {completed ? (
-        <Check className="QontoStepIcon-completedIcon" />
-      ) : (
-        <LensOutlined className="QontoStepIcon-circle" />
-      )}
+      {completed ? <Check /> : <LensOutlined />}
     </CustomStepIconRoot>
   );
 }

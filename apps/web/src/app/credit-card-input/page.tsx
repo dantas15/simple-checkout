@@ -1,6 +1,6 @@
 'use client';
 
-import { Stack, TextField, Typography } from '@mui/material';
+import { Grid, Stack, TextField, Typography } from '@mui/material';
 import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -93,28 +93,34 @@ export default function CreditCardInput() {
           error={!!form.formState.errors.creditCard}
           helperText={form.formState.errors.creditCard?.message}
         />
-        <Stack direction="row" justifyContent="space-between" gap={2}>
-          <DatePicker
-            {...form.register('dueDate')}
-            views={['year', 'month']}
-            label="Vencimento"
-            minDate={dayjs()}
-            onChange={(value) => form.setValue('dueDate', value ?? undefined)}
-            slots={{ textField: TextField }}
-          />
-          <TextField
-            {...form.register('securityNumber')}
-            label="CVV"
-            error={!!form.formState.errors.securityNumber}
-            helperText={form.formState.errors.securityNumber?.message}
-          />
-        </Stack>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <DatePicker
+              sx={{ width: '100%' }}
+              {...form.register('dueDate')}
+              views={['year', 'month']}
+              label="Vencimento"
+              minDate={dayjs()}
+              onChange={(value) => form.setValue('dueDate', value ?? undefined)}
+              slots={{ textField: TextField }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              {...form.register('securityNumber')}
+              label="CVV"
+              error={!!form.formState.errors.securityNumber}
+              helperText={form.formState.errors.securityNumber?.message}
+            />
+          </Grid>
+        </Grid>
 
         <SelectInstallments
           form={form}
           installmentOptions={availableInstallments}
         />
-        <SubmitButton color="secondary" fullWidth isLoading={false}>
+        <SubmitButton color="secondary" fullWidth isLoading={isLoading}>
           Pagar
         </SubmitButton>
       </Stack>
