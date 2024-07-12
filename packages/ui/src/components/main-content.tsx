@@ -17,7 +17,7 @@ export function MainContent({ children, alignCenter, sx, ...props }: Props) {
   const additionalStyles = alignCenter ? { ...centerStyles, ...sx } : sx;
   return (
     <Box
-      pt="1rem"
+      py="2rem"
       component="main"
       {...props}
       sx={{

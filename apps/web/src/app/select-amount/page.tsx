@@ -25,7 +25,6 @@ export default function Home() {
   const handleOnSubmit = async (data: Amount) => {
     setIsLoading(true);
     setTimeout(() => {
-      alert(data.amount);
       router.push('/credit-card-input');
       setIsLoading(false);
     }, 1000);
