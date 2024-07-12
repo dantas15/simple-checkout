@@ -9,14 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@hookform/resolvers": "^3.9.0",
     "@mui/icons-material": "^5.16.1",
     "@mui/material": "^5.16.1",
+    "@mui/material-nextjs": "^5.16.1",
+    "@mui/system": "^5.16.1",
     "@simple-checkout/ui": "workspace:*",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.52.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@simple-checkout/eslint-config": "workspace:*",
