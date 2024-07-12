@@ -9,62 +9,45 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { MainWrapper, SubmitButton } from '@simple-checkout/ui/components';
+import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-
-const amountSchema = z.object({
-  amount: z.coerce
-    .number({ message: 'A quantidade deve ser um número' })
-    .int({ message: 'A quantidade deve ser um número inteiro' })
-    .min(1, { message: 'A quantidade deve ser maior ou igual a 1' }),
-});
+import { type User, userSchema } from '../shared/schemas/user-schema';
+import { useStorage } from '../shared/hooks/useStorage';
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false);
-
+  const { setUser } = useStorage();
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof amountSchema>>({
-    resolver: zodResolver(amountSchema),
+  const form = useForm<User>({
+    resolver: zodResolver(userSchema),
   });
 
-  const handleOnSubmit = async (data: z.infer<typeof amountSchema>) => {
-    setIsLoading(true);
+  const handleOnSubmit = async (data: User) => {
     setTimeout(() => {
-      alert(data.amount);
-      router.push('/credit-card-input');
-      setIsLoading(false);
+      setUser(data);
+      router.push('/select-amount');
     }, 1000);
   };
-
   return (
-    <MainWrapper alignCenter>
-      <form onSubmit={form.handleSubmit(handleOnSubmit)}>
-        <Typography variant="h4" gutterBottom>
-          Quanto você vai pagar?
+    <MainContent alignCenter>
+      <Box component="form" onSubmit={form.handleSubmit(handleOnSubmit)}>
+        <Typography textAlign="center" variant="h4" gutterBottom>
+          Qual seu nome?
         </Typography>
+
         <Box sx={{ display: 'flex', gap: 2 }}>
-          <FormControl>
-            <TextField
-              {...form.register('amount')}
-              error={!!form.formState.errors.amount}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-              helperText={form.formState.errors.amount?.message}
-              placeholder="0.0"
-            />
-          </FormControl>
-          <SubmitButton startIcon={<Send />} isLoading={isLoading}>
+          <TextField
+            {...form.register('name')}
+            error={!!form.formState.errors.name}
+            helperText={form.formState.errors.name?.message}
+          />
+          <SubmitButton startIcon={<Send />} isLoading={false}>
             Enviar
           </SubmitButton>
         </Box>
-      </form>
-    </MainWrapper>
+      </Box>
+    </MainContent>
   );
 }
