@@ -2,16 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Send } from '@mui/icons-material';
-import {
-  Box,
-  FormControl,
-  InputAdornment,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { type User, userSchema } from '../shared/schemas/user-schema';
 import { useStorage } from '../shared/hooks/useStorage';
@@ -37,7 +30,7 @@ export default function Home() {
           Qual seu nome?
         </Typography>
 
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
           <TextField
             {...form.register('name')}
             error={!!form.formState.errors.name}

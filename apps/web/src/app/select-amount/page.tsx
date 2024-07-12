@@ -20,6 +20,7 @@ export default function Home() {
   });
 
   const { getUser } = useStorage();
+  const name = getUser().name;
 
   const handleOnSubmit = async (data: Amount) => {
     setIsLoading(true);
@@ -29,8 +30,6 @@ export default function Home() {
       setIsLoading(false);
     }, 1000);
   };
-
-  const name = getUser().name;
 
   return (
     <MainContent alignCenter>

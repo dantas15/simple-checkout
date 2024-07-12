@@ -18,7 +18,6 @@ export function useStorage() {
     if (!validated.success) {
       redirect('/');
     }
-    console.log(validated.data);
 
     return validated.data;
   };
