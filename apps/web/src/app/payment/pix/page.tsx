@@ -1,8 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
-import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
-import { useRouter } from 'next/navigation';
+import { usePaymentContext } from '../../../shared/hooks/usePaymentContext';
 import {
   MainContent,
   QRCode,
@@ -10,33 +8,17 @@ import {
 } from '@simple-checkout/ui/components';
 import { Stack, Typography } from '@mui/material';
 import { ContentCopy } from '@mui/icons-material';
-import { PaymentInfo } from '../credit-card-input/components/payment-info';
 
-export default function UpfrontPayment() {
-  const router = useRouter();
-  const { user, amount, creditCard, isLoading } = usePaymentContext();
-
-  useEffect(() => {
-    if (!isLoading && (!user || !amount || !creditCard)) {
-      if (!user) {
-        router.replace('/');
-      }
-      if (!amount) {
-        router.replace('/select-amount');
-      }
-      if (!creditCard) {
-        router.replace('/credit-card-input');
-      }
-    }
-  }, [user, amount, isLoading]);
+export default function Pix() {
+  const { user, amount, isLoading, updatePixPayment } = usePaymentContext();
 
   const name = user?.name;
   const amountToBepaid = (amount?.amount ?? 0) / 2;
-  const amountLeft = (amount?.amount ?? 0) - amountToBepaid;
 
   const qrcodeUrl = `${amountToBepaid}`;
   const handleCopyClick = async () => {
     await navigator.clipboard.writeText(qrcodeUrl);
+    await updatePixPayment();
   };
 
   return (
@@ -58,8 +40,6 @@ export default function UpfrontPayment() {
           Clique para copiar QR CODE <ContentCopy />
         </SubmitButton>
       </Stack>
-
-      <PaymentInfo firstAmount={amountToBepaid} secondAmount={amountLeft} />
     </MainContent>
   );
 }

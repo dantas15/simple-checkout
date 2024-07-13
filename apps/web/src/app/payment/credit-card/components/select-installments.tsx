@@ -1,5 +1,5 @@
 import { Controller, UseFormReturn } from 'react-hook-form';
-import { CreditCard } from '../../../shared/schemas/credit-card-schema';
+import { CreditCard } from '../../../../shared/schemas/credit-card-schema';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 type Installment = {
   value: number;
@@ -19,7 +19,9 @@ export function SelectInstallments({ installmentOptions, form }: Props) {
           <InputLabel id="selectedInstallment">Parcelas</InputLabel>
           <Select {...field} labelId="selectedInstallment" label="Parcelas">
             {installmentOptions.map((installment) => (
-              <MenuItem value={installment.value}>{installment.label}</MenuItem>
+              <MenuItem key={installment.value} value={installment.value}>
+                {installment.label}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

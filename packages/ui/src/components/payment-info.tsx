@@ -14,13 +14,25 @@ import dayjs from 'dayjs';
 import { StepIcon } from './step-icon';
 import { FAQ } from './faq';
 
+type PaymentTypes = 'pix' | 'credit-card';
+type StepperOptions = {
+  active: PaymentTypes;
+  completed: PaymentTypes[];
+};
+
 type Props = {
   identifier: string;
   firstAmount: number;
   secondAmount: number;
+  stepperOptions: StepperOptions;
 };
 
-export function PaymentInfo({ identifier, firstAmount, secondAmount }: Props) {
+export function PaymentInfo({
+  identifier,
+  firstAmount,
+  secondAmount,
+  stepperOptions,
+}: Props) {
   return (
     <>
       <Stack pt={4} alignItems="center">
@@ -38,11 +50,14 @@ export function PaymentInfo({ identifier, firstAmount, secondAmount }: Props) {
         alignItems="center"
       >
         <div>
-          <Stepper orientation="vertical">
-            <Step completed>
+          <Stepper
+            activeStep={stepperOptions.active === 'pix' ? 0 : 1}
+            orientation="vertical"
+          >
+            <Step completed={stepperOptions.completed.includes('pix')}>
               <StepLabel>1ª entrada no Pix</StepLabel>
             </Step>
-            <Step>
+            <Step completed={stepperOptions.completed.includes('credit-card')}>
               <StepLabel StepIconComponent={StepIcon}>2ª no cartão</StepLabel>
             </Step>
           </Stepper>

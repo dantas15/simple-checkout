@@ -7,13 +7,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import {
-  CreditCard,
+  CreditCard as CreditCardType,
   creditCardSchema,
-} from '../../shared/schemas/credit-card-schema';
-import { PaymentInfo } from './components/payment-info';
-import { useEffect } from 'react';
-import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
-import { useRouter } from 'next/navigation';
+} from '../../../shared/schemas/credit-card-schema';
+import { usePaymentContext } from '../../../shared/hooks/usePaymentContext';
 import { SelectInstallments } from './components/select-installments';
 
 type Installment = {
@@ -24,19 +21,19 @@ const fetchMockInstallments = (transactionAmount: number): Installment[] => {
   const mockInstallments: Installment[] = [];
   const mockFee = 0.25;
   for (let i = 0; i < 12; i++) {
-    const installment = i + 1;
+    const installmentQuantity = i + 1;
     const totalWithFees = transactionAmount + i * mockFee * transactionAmount;
+    const installmentValue = totalWithFees / installmentQuantity;
     mockInstallments.push({
-      value: installment,
-      label: `Parcele em ${installment}x de ${totalWithFees}`,
+      value: installmentQuantity,
+      label: `Parcele em ${installmentQuantity}x de ${installmentValue.toFixed(2)} (total: ${totalWithFees})`,
     });
   }
   return mockInstallments;
 };
 
-export default function CreditCardInput() {
-  const router = useRouter();
-  const form = useForm<CreditCard>({
+export default function CreditCard() {
+  const form = useForm<CreditCardType>({
     resolver: zodResolver(creditCardSchema),
     defaultValues: {
       selectedInstallment: 1,
@@ -45,21 +42,10 @@ export default function CreditCardInput() {
 
   const { user, amount, isLoading, updateCreditCard } = usePaymentContext();
 
-  useEffect(() => {
-    if (!isLoading && (!user || !amount)) {
-      if (!user) {
-        router.replace('/');
-      }
-      if (!amount) {
-        router.replace('/select-amount');
-      }
-    }
-  }, [user, amount, isLoading]);
-
   const name = user?.name ?? '';
   const amountInCents = amount?.amount ?? 0;
 
-  const handleOnSubmit = (data: CreditCard) => {
+  const handleOnSubmit = (data: CreditCardType) => {
     updateCreditCard(data);
   };
 
@@ -124,10 +110,6 @@ export default function CreditCardInput() {
           Pagar
         </SubmitButton>
       </Stack>
-      <PaymentInfo
-        firstAmount={amountInCents / 2}
-        secondAmount={amountInCents / 2}
-      />
     </MainContent>
   );
 }
