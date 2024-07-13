@@ -26,10 +26,8 @@ export default function PaymentLaoyout({ children }: Props) {
         identifier="123"
         firstAmount={pixAmount}
         secondAmount={creditCardAmount}
-        stepperOptions={{
-          active: pixOrCreditCardSelected,
-          completed: completedSteps,
-        }}
+        completedSteps={completedSteps}
+        activeStep={pixOrCreditCardSelected}
       />
     </MainContent>
   );

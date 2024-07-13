@@ -15,23 +15,21 @@ import { StepIcon } from './step-icon';
 import { FAQ } from './faq';
 
 type PaymentTypes = 'pix' | 'credit-card';
-type StepperOptions = {
-  active: PaymentTypes;
-  completed: PaymentTypes[];
-};
 
 type Props = {
   identifier: string;
   firstAmount: number;
   secondAmount: number;
-  stepperOptions: StepperOptions;
+  activeStep?: PaymentTypes;
+  completedSteps: PaymentTypes[];
 };
 
 export function PaymentInfo({
   identifier,
   firstAmount,
   secondAmount,
-  stepperOptions,
+  activeStep,
+  completedSteps,
 }: Props) {
   return (
     <>
@@ -51,13 +49,13 @@ export function PaymentInfo({
       >
         <div>
           <Stepper
-            activeStep={stepperOptions.active === 'pix' ? 0 : 1}
+            activeStep={activeStep === 'credit-card' ? 1 : 0}
             orientation="vertical"
           >
-            <Step completed={stepperOptions.completed.includes('pix')}>
+            <Step completed={completedSteps.includes('pix')}>
               <StepLabel>1ª entrada no Pix</StepLabel>
             </Step>
-            <Step completed={stepperOptions.completed.includes('credit-card')}>
+            <Step completed={completedSteps.includes('credit-card')}>
               <StepLabel StepIconComponent={StepIcon}>2ª no cartão</StepLabel>
             </Step>
           </Stepper>
