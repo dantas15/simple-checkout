@@ -9,16 +9,18 @@ import {
   Stepper,
   Typography,
 } from '@mui/material';
-import { FAQ, StepIcon } from '@simple-checkout/ui/components';
 
 import dayjs from 'dayjs';
+import { StepIcon } from './step-icon';
+import { FAQ } from './faq';
 
 type Props = {
+  identifier: string;
   firstAmount: number;
   secondAmount: number;
 };
 
-export function PaymentInfo({ firstAmount, secondAmount }: Props) {
+export function PaymentInfo({ identifier, firstAmount, secondAmount }: Props) {
   return (
     <>
       <Stack pt={4} alignItems="center">
@@ -62,7 +64,7 @@ export function PaymentInfo({ firstAmount, secondAmount }: Props) {
           Identificador
         </Typography>
         <Typography variant="body2" fontWeight={700}>
-          {'123'}
+          {identifier}
         </Typography>
       </Stack>
     </>

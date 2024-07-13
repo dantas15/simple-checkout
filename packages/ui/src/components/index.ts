@@ -4,5 +4,14 @@ import { MainContent } from './main-content';
 import { StepIcon } from './step-icon';
 import { FAQ } from './faq';
 import { QRCode } from './qr-code';
+import { PaymentInfo } from './payment-info';
 
-export { MainWrapper, SubmitButton, MainContent, StepIcon, FAQ, QRCode };
+export {
+  MainWrapper,
+  SubmitButton,
+  MainContent,
+  StepIcon,
+  FAQ,
+  QRCode,
+  PaymentInfo,
+};
