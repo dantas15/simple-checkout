@@ -1,6 +1,6 @@
 'use client';
 
-import { PaymentInfo } from '@simple-checkout/ui/components';
+import { MainContent, PaymentInfo } from '@simple-checkout/ui/components';
 import { ReactNode } from 'react';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
 
@@ -20,7 +20,7 @@ export default function PaymentLaoyout({ children }: Props) {
     paymentStatus === '5-pix-confirmed' ? ['pix' as const] : [];
 
   return (
-    <>
+    <MainContent>
       {children}
       <PaymentInfo
         identifier="123"
@@ -31,6 +31,6 @@ export default function PaymentLaoyout({ children }: Props) {
           completed: completedSteps,
         }}
       />
-    </>
+    </MainContent>
   );
 }

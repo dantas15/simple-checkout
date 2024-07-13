@@ -1,11 +1,7 @@
 'use client';
 
 import { usePaymentContext } from '../../../shared/hooks/usePaymentContext';
-import {
-  MainContent,
-  QRCode,
-  SubmitButton,
-} from '@simple-checkout/ui/components';
+import { QRCode, SubmitButton } from '@simple-checkout/ui/components';
 import { Stack, Typography } from '@mui/material';
 import { ContentCopy } from '@mui/icons-material';
 
@@ -22,7 +18,7 @@ export default function Pix() {
   };
 
   return (
-    <MainContent>
+    <>
       <Typography variant="h6" gutterBottom>
         {name}, pague a entrada de R${amountToBepaid} e escolha o restante no
         cartão!
@@ -40,6 +36,6 @@ export default function Pix() {
           Clique para copiar QR CODE <ContentCopy />
         </SubmitButton>
       </Stack>
-    </MainContent>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { Grid, Stack, TextField, Typography } from '@mui/material';
-import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
+import { SubmitButton } from '@simple-checkout/ui/components';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DatePicker } from '@mui/x-date-pickers';
@@ -52,7 +52,7 @@ export default function CreditCard() {
   const availableInstallments = fetchMockInstallments(amountInCents);
 
   return (
-    <MainContent>
+    <>
       <Typography textAlign="center" variant="h6" gutterBottom>
         {name}, pague a entrada e escolha o restante no cartão!
       </Typography>
@@ -110,6 +110,6 @@ export default function CreditCard() {
           Pagar
         </SubmitButton>
       </Stack>
-    </MainContent>
+    </>
   );
 }
