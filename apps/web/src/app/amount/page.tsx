@@ -4,26 +4,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Send } from '@mui/icons-material';
 import { Box, InputAdornment, TextField, Typography } from '@mui/material';
 import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { amountSchema, type Amount } from '../../shared/schemas/amount-schema';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
-import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const router = useRouter();
-
   const form = useForm<Amount>({
     resolver: zodResolver(amountSchema),
   });
 
   const { user, isLoading, updateAmount } = usePaymentContext();
 
-  useEffect(() => {
-    if (!isLoading && !user) {
-      router.replace('/');
-    }
-  }, [isLoading, user]);
   const name = user?.name;
 
   const handleOnSubmit = async (data: Amount) => {
