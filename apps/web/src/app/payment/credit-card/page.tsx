@@ -19,7 +19,7 @@ type Installment = {
 };
 const fetchMockInstallments = (transactionAmount: number): Installment[] => {
   const mockInstallments: Installment[] = [];
-  const mockFee = 0.25;
+  const mockFee = 0.05;
   for (let i = 0; i < 12; i++) {
     const installmentQuantity = i + 1;
     const totalWithFees = transactionAmount + i * mockFee * transactionAmount;
