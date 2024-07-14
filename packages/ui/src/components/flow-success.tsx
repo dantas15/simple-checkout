@@ -1,14 +1,9 @@
-import { Box, Typography, Stack } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { CheckCircle } from '@mui/icons-material';
-import { ReactNode } from 'react';
 
-type Props = {
-  goBackComponent: ReactNode;
-};
-
-export function Success({ goBackComponent }: Props) {
+export function Success() {
   return (
-    <Stack alignItems="center" justifyContent="center">
+    <>
       <Box
         sx={{
           mb: 4,
@@ -24,7 +19,6 @@ export function Success({ goBackComponent }: Props) {
       <Typography variant="h4" gutterBottom mb={2}>
         Pagamento confirmado!
       </Typography>
-      {goBackComponent}
-    </Stack>
+    </>
   );
 }
