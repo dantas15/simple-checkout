@@ -48,6 +48,7 @@ export function PixOption({ value, label, total, cashback, discount }: Props) {
 
   return (
     <Card
+      component="li"
       variant="outlined"
       sx={{
         ...cardStyles,
