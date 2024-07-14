@@ -1,10 +1,10 @@
 'use client';
 
-import { StepIconProps, styled } from '@mui/material';
+import { Box, StepIconProps, styled } from '@mui/material';
 import { muteColor, primaryColor } from '../theme';
 import { Check, LensOutlined } from '@mui/icons-material';
 
-const CustomStepIconRoot = styled('div')<{ ownerState: { active?: boolean } }>(
+const CustomStepIconRoot = styled(Box)<{ ownerState: { active?: boolean } }>(
   ({ theme, ownerState }) => ({
     color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : muteColor,
     display: 'flex',
