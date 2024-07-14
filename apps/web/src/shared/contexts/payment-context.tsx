@@ -24,6 +24,7 @@ export type PaymentContextType = {
   pixPreference: Nullable<PixPreference>;
   updatePixPreferences: (data: PixPreference) => Promise<void>;
   updatePixPayment: () => Promise<void>;
+  clearData: () => void | Promise<void>;
   isLoading: boolean;
 };
 
@@ -59,48 +60,43 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
   const updateUser = async (data: User) => {
     setPaymentStatus('pending');
     setUser(data);
-    updatePaymentStatus('2-user-specified');
+    updatePaymentStatus('2-user-specified', '/amount');
   };
   const updateAmount = async (data: Amount) => {
     setPaymentStatus('pending');
     setAmount(data);
-    updatePaymentStatus('3-amount-specified');
+    updatePaymentStatus('3-amount-specified', '/select-pix');
   };
   const updatePixPreferences = async (data: PixPreference) => {
     setPaymentStatus('pending');
     setPixPreference(data);
-    updatePaymentStatus('4-pix-type-selected');
+    updatePaymentStatus('4-pix-type-selected', '/payment/pix');
   };
   const updatePixPayment = async () => {
     setPaymentStatus('pending');
-    updatePaymentStatus('5-pix-confirmed');
+    await setTimeout(async () => {
+      updatePaymentStatus('5-pix-confirmed', '/payment/credit-card');
+    }, 500);
   };
   const updateCreditCard = async (data: CreditCard) => {
     setPaymentStatus('pending');
-    setCreditCard(data);
-    updatePaymentStatus('6-success');
+    await setTimeout(async () => {
+      setCreditCard(data);
+      updatePaymentStatus('6-success', '/success');
+    }, 500);
   };
 
-  useEffect(() => {
-    if (paymentStatus === '1-missing-all-info') {
-      router.push('/');
-    }
-    if (paymentStatus === '2-user-specified') {
-      router.push('/amount');
-    }
-    if (paymentStatus === '3-amount-specified') {
-      router.push('/select-pix');
-    }
-    if (paymentStatus === '4-pix-type-selected') {
-      router.push('/payment/pix');
-    }
-    if (paymentStatus === '5-pix-confirmed') {
-      router.push('/payment/credit-card');
-    }
-    if (paymentStatus === '6-success') {
-      router.push('/success');
-    }
-  }, [paymentStatus]);
+  const clearData = () => {
+    setUser(null);
+    setAmount(null);
+    setCreditCard(null);
+    setPixPreference(null);
+    setPaymentStatus('1-missing-all-info');
+    window.history.replaceState(null, '', '/');
+    router.replace('/');
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <PaymentContext.Provider
@@ -116,6 +112,7 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
         updatePixPreferences,
         updatePixPayment,
         isLoading: paymentStatus === 'pending',
+        clearData,
       }}
     >
       {children}

@@ -8,6 +8,7 @@ import { PaymentInfo } from './payment-info';
 import { Fab } from './floating-action-button';
 import { type PixStallmentOptionType, PixOption } from './pix-option';
 import { SelectPixPaymentForm } from './select-pix-payment-form';
+import { Success } from './flow-success';
 
 export {
   MainWrapper,
@@ -20,6 +21,7 @@ export {
   Fab,
   PixOption as PixStallmentOption,
   SelectPixPaymentForm,
+  Success,
 };
 
 export type { PixStallmentOptionType };
