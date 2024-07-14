@@ -11,10 +11,10 @@ import { isBrowser } from '../../utils/isBrowser';
 export default function Success() {
   const { clearData } = usePaymentContext();
   const handleOnClick = () => {
-    clearData();
     if (isBrowser()) {
       window.history.replaceState(null, '', '/');
     }
+    clearData();
   };
   return (
     <MainContent alignCenter>

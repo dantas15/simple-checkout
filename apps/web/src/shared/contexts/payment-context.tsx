@@ -95,8 +95,6 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
     router.replace('/');
   };
 
-  useEffect(() => {}, []);
-
   return (
     <PaymentContext.Provider
       value={{
