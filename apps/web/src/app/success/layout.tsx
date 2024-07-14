@@ -23,7 +23,10 @@ export default function SuccessLayout({ children }: Props) {
   }
 
   if (paymentStatus !== '6-success') {
-    return router.back();
+    if (isBrowser()) {
+      window.history.replaceState(null, '', '/');
+      router.push('/');
+    }
   }
 
   return <>{children}</>;

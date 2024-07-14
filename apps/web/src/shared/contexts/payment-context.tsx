@@ -92,7 +92,6 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
     setCreditCard(null);
     setPixPreference(null);
     setPaymentStatus('1-missing-all-info');
-    router.replace('/');
   };
 
   return (

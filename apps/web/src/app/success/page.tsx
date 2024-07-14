@@ -6,14 +6,10 @@ import {
   MainContent,
 } from '@simple-checkout/ui/components';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
-import { isBrowser } from '../../utils/isBrowser';
 
 export default function Success() {
   const { clearData } = usePaymentContext();
   const handleOnClick = () => {
-    if (isBrowser()) {
-      window.history.replaceState(null, '', '/');
-    }
     clearData();
   };
   return (
