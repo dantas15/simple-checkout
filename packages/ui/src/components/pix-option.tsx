@@ -2,15 +2,16 @@
 
 import { CheckCircle } from '@mui/icons-material';
 import {
-  Box,
   Card,
   CardContent,
   Radio,
   Stack,
-  styled,
   Typography,
   useRadioGroup,
 } from '@mui/material';
+import { getPaperOrPrimaryWithOpacityBackground } from '../utils/getPaperOrPrimaryWithOpacityBackground';
+import { Flag } from './flag';
+import { theme } from '../theme';
 
 export type PixStallmentOptionType = {
   value: string;
@@ -20,43 +21,37 @@ export type PixStallmentOptionType = {
   discount?: number;
 };
 
+const cardStyles = {
+  borderWidth: 2,
+  borderRadius: 0,
+  '&:first-of-type': {
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+  '&:last-of-type': {
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+  },
+  '&:not(:first-of-type):not(:last-of-type)': {
+    borderBottomWidth: 0,
+  },
+  '&:first-of-type:not(:last-of-type)': {
+    borderBottomWidth: 0,
+  },
+};
+
 type Props = PixStallmentOptionType;
 
-const BlueFlag = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
-  color: '#fff',
-  padding: '4px 8px',
-  borderRadius: '4px',
-  marginTop: theme.spacing(2),
-  display: 'inline-block',
-  width: '100%',
-}));
-
-export function PixStallmentOption({
-  value,
-  label,
-  total,
-  cashback,
-  discount,
-}: Props) {
+export function PixOption({ value, label, total, cashback, discount }: Props) {
   const radioGroup = useRadioGroup();
   const isSelected = radioGroup?.value === value;
 
   return (
     <Card
       variant="outlined"
-      component="li"
-      color={isSelected ? 'primary' : 'secondary'}
       sx={{
-        borderRadius: 0,
-        '&:first-of-type': {
-          borderTopLeftRadius: 8,
-          borderTopRightRadius: 8,
-        },
-        '&:last-of-type': {
-          borderBottomLeftRadius: 8,
-          borderBottomRightRadius: 8,
-        },
+        ...cardStyles,
+        background: getPaperOrPrimaryWithOpacityBackground(theme, isSelected),
       }}
     >
       <CardContent>
@@ -78,15 +73,15 @@ export function PixStallmentOption({
           <Radio value={value} checkedIcon={<CheckCircle />} />
         </Stack>
         {cashback && (
-          <BlueFlag>
+          <Flag isSelected={isSelected}>
             💰 <b>R$ {(total / cashback).toFixed(2)}</b> de volta no seu Pix na
             hora
-          </BlueFlag>
+          </Flag>
         )}
         {discount && (
-          <BlueFlag>
+          <Flag isSelected={isSelected}>
             <b>-{discount}% de juros</b>: Melhor opção de parcelamento
-          </BlueFlag>
+          </Flag>
         )}
       </CardContent>
     </Card>

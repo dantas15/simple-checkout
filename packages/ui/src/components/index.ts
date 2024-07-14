@@ -5,6 +5,9 @@ import { StepIcon } from './step-icon';
 import { FAQ } from './faq';
 import { QRCode } from './qr-code';
 import { PaymentInfo } from './payment-info';
+import { Fab } from './floating-action-button';
+import { type PixStallmentOptionType, PixOption } from './pix-option';
+import { SelectPixPaymentForm } from './select-pix-payment-form';
 
 export {
   MainWrapper,
@@ -14,4 +17,9 @@ export {
   FAQ,
   QRCode,
   PaymentInfo,
+  Fab,
+  PixOption as PixStallmentOption,
+  SelectPixPaymentForm,
 };
+
+export type { PixStallmentOptionType };
