@@ -67,8 +67,8 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
     updatePaymentStatus('3-amount-specified');
   };
   const updatePixPreferences = async (data: PixPreference) => {
-    setPixPreference(data);
     setPaymentStatus('pending');
+    setPixPreference(data);
     updatePaymentStatus('4-pix-type-selected');
   };
   const updatePixPayment = async () => {
