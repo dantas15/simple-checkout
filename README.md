@@ -111,12 +111,6 @@ This is an example of how to list things you need to use the software and how to
   npm install pnpm -g
   ```
 
-- Docker
-
-  ```sh
-  https://www.docker.com/get-started/
-  ```
-
 ## Installation
 
 Clone the repo
@@ -131,13 +125,7 @@ git clone https://github.com/dantas15/simple-checkout.git
    pnpm install
    ```
 
-2. Run containers
-
-   ```sh
-   pnpm compose:up
-   ```
-
-3. Run the Project
+2. Run the Project
 
    ```sh
    pnpm dev
