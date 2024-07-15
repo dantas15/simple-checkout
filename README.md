@@ -36,25 +36,39 @@
 > [!NOTE]
 > The project is a simple demonstration for a frontend challenge and it's still in development, with that in mind, you can help me by creating issues on the [repo][project-url]
 
-The project is a simple checkout where the user specifies the amount to be paid, then two invoices are created:
+The project is a simple checkout where the user specifies
 
-- Upfront payment with Pix (Brazillian instant payment method)
-- Remainder payment (with credit card or pix)
+- its name
+- the amount to be paid
 
-The user is prompted to pay using Pix.
+Then two invoices are created:
 
-Once the upfront payment is confirmed, the user can choose how he pays the remainder:
+- Pix (Brazillian instant payment method that Woovi offers the stallment option)
+- Credit Card
 
-- Instantly with Pix
-- Divide using credit card
+The user is prompted to pay choose the stallment for Pix.
 
-Once the payment is confirmed, display a success page.
+Once the user choosed the stallment quantity, the user is taken to another page and prompted to pay with QRCode or to copy the link:
 
-The following image displays the basic frontend workflow:
+Once the payment is confirmed, user is taken to the second part of the payment with credit card.
+
+The user is then promptet to insert some info to validate the credit card:
+
+- Full name
+- Document
+- Card number
+- Validation date the card is due (Month, Year)
+- Security Code (CVV)
+- Quantity of stallments (with fees) that the price  is going to be divided
+
+Once the information is valid and the payment is validated, success screen shows, prompting the user to make another transaction from the beginning.
+
+The following image displays the frontend workflow described above:
 
 ![frontend-workflow]
 
-- Some screens were taken from the [challenge Figma](https://www.figma.com/file/hv1LgD7oNrtlmfWgKBG6PF/Woovi-Desafio-Front?node-id=1%3A100)
+
+- Some screens were taken from the challenge [Figma](https://www.figma.com/file/hv1LgD7oNrtlmfWgKBG6PF/Woovi-Desafio-Front?node-id=1%3A100)
 
 ### Project structure
 
