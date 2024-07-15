@@ -6,11 +6,14 @@ import {
   MainContent,
 } from '@simple-checkout/ui/components';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
+import { useRouter } from 'next/navigation';
 
 export default function Success() {
+  const router = useRouter();
   const { clearData } = usePaymentContext();
-  const handleOnClick = () => {
-    clearData();
+  const handleOnClick = async () => {
+    await clearData();
+    router.push('/');
   };
   return (
     <MainContent alignCenter>

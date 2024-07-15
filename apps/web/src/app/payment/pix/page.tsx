@@ -4,8 +4,10 @@ import { usePaymentContext } from '../../../shared/hooks/usePaymentContext';
 import { QRCode, SubmitButton } from '@simple-checkout/ui/components';
 import { Stack, Typography } from '@mui/material';
 import { ContentCopy } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 
 export default function Pix() {
+  const router = useRouter();
   const { user, amount, isLoading, updatePixPayment } = usePaymentContext();
 
   const name = user?.name;
@@ -15,6 +17,7 @@ export default function Pix() {
   const handleCopyClick = async () => {
     await navigator.clipboard.writeText(qrcodeUrl);
     await updatePixPayment();
+    router.push('/payment/credit-card');
   };
 
   return (

@@ -7,8 +7,11 @@ import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
 import { useForm } from 'react-hook-form';
 import { amountSchema, type Amount } from '../../shared/schemas/amount-schema';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
   const form = useForm<Amount>({
     resolver: zodResolver(amountSchema),
   });
@@ -18,7 +21,8 @@ export default function Home() {
   const name = user?.name;
 
   const handleOnSubmit = async (data: Amount) => {
-    updateAmount(data);
+    await updateAmount(data);
+    router.push('/select-pix');
   };
 
   return (

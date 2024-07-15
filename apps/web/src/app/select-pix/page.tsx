@@ -11,6 +11,7 @@ import {
   pixPreferenceSchema,
 } from '../../shared/schemas/pix-preference-schema';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const fetchMockPixInstallments = (
   transactionAmount: number
@@ -32,6 +33,8 @@ const fetchMockPixInstallments = (
 };
 
 export default function SelectPix() {
+  const router = useRouter();
+
   const [selectValue, setSelectValue] = useState<PixPreference>('0');
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -52,7 +55,8 @@ export default function SelectPix() {
       console.log(validData.error);
       return;
     }
-    updatePixPreferences(validData.data);
+    await updatePixPreferences(validData.data);
+    router.push('/payment/pix');
   };
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const validData = pixPreferenceSchema.safeParse(event.target.value);

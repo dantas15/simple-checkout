@@ -12,6 +12,7 @@ import {
 } from '../../../shared/schemas/credit-card-schema';
 import { usePaymentContext } from '../../../shared/hooks/usePaymentContext';
 import { SelectInstallments } from './components/select-installments';
+import { useRouter } from 'next/navigation';
 
 type Installment = {
   value: number;
@@ -33,6 +34,7 @@ const fetchMockInstallments = (transactionAmount: number): Installment[] => {
 };
 
 export default function CreditCard() {
+  const router = useRouter();
   const form = useForm<CreditCardType>({
     resolver: zodResolver(creditCardSchema),
     defaultValues: {
@@ -45,8 +47,9 @@ export default function CreditCard() {
   const name = user?.name ?? '';
   const amountInCents = amount?.amount ?? 0;
 
-  const handleOnSubmit = (data: CreditCardType) => {
-    updateCreditCard(data);
+  const handleOnSubmit = async (data: CreditCardType) => {
+    await updateCreditCard(data);
+    router.push('/success');
   };
 
   const availableInstallments = fetchMockInstallments(amountInCents);
