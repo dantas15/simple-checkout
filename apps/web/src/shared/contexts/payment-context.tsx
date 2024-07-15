@@ -60,29 +60,35 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
   const updateUser = async (data: User) => {
     setPaymentStatus('pending');
     setUser(data);
-    updatePaymentStatus('2-user-specified', '/amount');
+    setTimeout(() => {
+      updatePaymentStatus('2-user-specified');
+    }, 500);
   };
   const updateAmount = async (data: Amount) => {
     setPaymentStatus('pending');
     setAmount(data);
-    updatePaymentStatus('3-amount-specified', '/select-pix');
+    setTimeout(() => {
+      updatePaymentStatus('3-amount-specified');
+    }, 500);
   };
   const updatePixPreferences = async (data: PixPreference) => {
     setPaymentStatus('pending');
     setPixPreference(data);
-    updatePaymentStatus('4-pix-type-selected', '/payment/pix');
+    setTimeout(() => {
+      updatePaymentStatus('4-pix-type-selected');
+    }, 500);
   };
   const updatePixPayment = async () => {
     setPaymentStatus('pending');
-    await setTimeout(async () => {
-      updatePaymentStatus('5-pix-confirmed', '/payment/credit-card');
+    setTimeout(() => {
+      updatePaymentStatus('5-pix-confirmed');
     }, 500);
   };
   const updateCreditCard = async (data: CreditCard) => {
     setPaymentStatus('pending');
-    await setTimeout(async () => {
+    setTimeout(() => {
       setCreditCard(data);
-      updatePaymentStatus('6-success', '/success');
+      updatePaymentStatus('6-success');
     }, 500);
   };
 
