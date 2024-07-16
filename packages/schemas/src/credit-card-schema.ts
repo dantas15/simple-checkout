@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { dayjsSchema } from './dayjs-schema';
-import { validateCPF } from '../../utils/validate-cpf';
+import { validateCPF } from './utils/validate-cpf';
 import dayjs, { type Dayjs } from 'dayjs';
 
 export const creditCardSchema = z.object({

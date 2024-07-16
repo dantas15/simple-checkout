@@ -2,7 +2,7 @@ export function validateCPF(cpf: string) {
   cpf = cpf.replace(/[^\d]/g, '');
 
   if (cpf.length !== 11) return false;
-  /* let it pass for now...
+
   if (/^(\d)\1+$/.test(cpf)) return false;
 
   let sum = 0;
@@ -24,6 +24,6 @@ export function validateCPF(cpf: string) {
 
   if (remainder === 10 || remainder === 11) remainder = 0;
   if (remainder !== parseInt(cpf.substring(10, 11))) return false;
-*/
+
   return true;
 }

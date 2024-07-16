@@ -1,4 +1,4 @@
-import { PaymentStatus } from '../shared/schemas/payment-status-schema';
+import { type PaymentStatus } from '@simple-checkout/schemas';
 
 type ImplementedRoutes = Exclude<PaymentStatus, 'pending'>;
 

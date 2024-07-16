@@ -1,12 +1,14 @@
 'use client';
 
 import { createContext, ReactNode, useState } from 'react';
-import { type User } from '../schemas/user-schema';
-import { type Amount } from '../schemas/amount-schema';
-import { type CreditCard } from '../schemas/credit-card-schema';
+import type {
+  User,
+  Amount,
+  CreditCard,
+  PaymentStatus,
+  PixPreference,
+} from '@simple-checkout/schemas';
 import { useRouter } from 'next/navigation';
-import type { PaymentStatus } from '../schemas/payment-status-schema';
-import { PixPreference } from '../schemas/pix-preference-schema';
 
 type Nullable<T> = T | null | undefined;
 

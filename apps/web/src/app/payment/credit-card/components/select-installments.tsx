@@ -1,5 +1,5 @@
 import { Controller, UseFormReturn } from 'react-hook-form';
-import { CreditCard } from '../../../../shared/schemas/credit-card-schema';
+import { type CreditCard } from '@simple-checkout/schemas';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 type Installment = {
   value: number;

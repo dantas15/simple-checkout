@@ -5,7 +5,7 @@ import { Send } from '@mui/icons-material';
 import { Box, InputAdornment, TextField, Typography } from '@mui/material';
 import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
 import { useForm } from 'react-hook-form';
-import { amountSchema, type Amount } from '../../shared/schemas/amount-schema';
+import { amountSchema, type Amount } from '@simple-checkout/schemas';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
 import { useRouter } from 'next/navigation';
 import { fallbackRoutesFromStatus } from '../../utils/fallback-routes';

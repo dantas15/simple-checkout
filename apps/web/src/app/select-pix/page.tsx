@@ -7,9 +7,9 @@ import {
 } from '@simple-checkout/ui/components';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
 import {
-  PixPreference,
+  type PixPreference,
   pixPreferenceSchema,
-} from '../../shared/schemas/pix-preference-schema';
+} from '@simple-checkout/schemas';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fallbackRoutesFromStatus } from '../../utils/fallback-routes';

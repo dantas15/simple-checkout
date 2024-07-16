@@ -7,9 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import {
-  CreditCard as CreditCardType,
+  type CreditCard as CreditCardType,
   creditCardSchema,
-} from '../../../shared/schemas/credit-card-schema';
+} from '@simple-checkout/schemas';
 import { usePaymentContext } from '../../../shared/hooks/usePaymentContext';
 import { SelectInstallments } from './components/select-installments';
 import { useRouter } from 'next/navigation';

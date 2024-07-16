@@ -19,6 +19,7 @@
     "@mui/system": "^5.16.1",
     "@mui/x-date-pickers": "^7.10.0",
     "@simple-checkout/ui": "workspace:*",
+    "@simple-checkout/schemas": "workspace:*",
     "dayjs": "^1.11.11",
     "next": "14.2.5",
     "next-qrcode": "^2.5.1",
