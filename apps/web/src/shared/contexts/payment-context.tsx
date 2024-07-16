@@ -1,18 +1,16 @@
 'use client';
 
-import { createContext, ReactNode, useEffect, useState } from 'react';
-import { userSchema, type User } from '../schemas/user-schema';
-import { amountSchema, type Amount } from '../schemas/amount-schema';
-import {
-  creditCardSchema,
-  type CreditCard,
-} from '../schemas/credit-card-schema';
+import { createContext, ReactNode, useState } from 'react';
+import { type User } from '../schemas/user-schema';
+import { type Amount } from '../schemas/amount-schema';
+import { type CreditCard } from '../schemas/credit-card-schema';
 import { useRouter } from 'next/navigation';
 import type { PaymentStatus } from '../schemas/payment-status-schema';
 import { PixPreference } from '../schemas/pix-preference-schema';
 
 type Nullable<T> = T | null | undefined;
 
+/* eslint-disable no-unused-vars */
 export type PaymentContextType = {
   paymentStatus: PaymentStatus;
   user: Nullable<User>;
@@ -27,6 +25,7 @@ export type PaymentContextType = {
   clearData: () => void | Promise<void>;
   isPaymentLoading: boolean;
 };
+/* eslint-enable no-unused-vars */
 
 export const PaymentContext = createContext<PaymentContextType | undefined>(
   undefined

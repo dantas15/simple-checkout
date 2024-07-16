@@ -42,7 +42,6 @@ export default function SelectPix() {
   const {
     user,
     isPaymentLoading,
-    paymentStatus,
     updatePixPreferences,
     amount: amountFromContext,
   } = usePaymentContext();

@@ -3,6 +3,7 @@ import { PaymentStatus } from '../shared/schemas/payment-status-schema';
 type ImplementedRoutes = Exclude<PaymentStatus, 'pending'>;
 
 type RedirectToType = {
+  // eslint-disable-next-line no-unused-vars
   [key in ImplementedRoutes]: string;
 };
 
