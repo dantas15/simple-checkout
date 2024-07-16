@@ -12,6 +12,7 @@ import {
 } from '../../shared/schemas/pix-preference-schema';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { fallbackRoutesFromStatus } from '../../utils/fallback-routes';
 
 const fetchMockPixInstallments = (
   transactionAmount: number
@@ -40,9 +41,16 @@ export default function SelectPix() {
 
   const {
     user,
+    isPaymentLoading,
+    paymentStatus,
     updatePixPreferences,
     amount: amountFromContext,
   } = usePaymentContext();
+
+  if (isPaymentLoading && !amountFromContext) {
+    console.log({ paymentStatus });
+    router.replace(fallbackRoutesFromStatus['3-amount-specified']);
+  }
 
   const handleOnSubmit = async (
     event: React.FormEvent | React.MouseEventHandler<HTMLButtonElement>
@@ -59,6 +67,7 @@ export default function SelectPix() {
     router.push('/payment/pix');
   };
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsFormValid(true);
     const validData = pixPreferenceSchema.safeParse(event.target.value);
     if (!validData.success) {
       setIsFormValid(false);
