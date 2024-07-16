@@ -9,6 +9,7 @@ import { Fab } from './floating-action-button';
 import { type PixStallmentOptionType, PixOption } from './pix-option';
 import { SelectPixPaymentForm } from './select-pix-payment-form';
 import { Success } from './flow-success';
+import { Loading } from './loading';
 
 export {
   MainWrapper,
@@ -22,6 +23,7 @@ export {
   PixOption as PixStallmentOption,
   SelectPixPaymentForm,
   Success,
+  Loading,
 };
 
 export type { PixStallmentOptionType };

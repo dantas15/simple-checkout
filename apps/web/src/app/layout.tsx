@@ -5,9 +5,8 @@ import './globals.css';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { theme } from '@simple-checkout/ui';
 import { Suspense } from 'react';
-import Loading from './loading';
 import { ClientProviders } from './client-providers';
-import { MainWrapper } from '@simple-checkout/ui/components';
+import { Loading, MainWrapper } from '@simple-checkout/ui/components';
 
 const font = Nunito({
   weight: ['300', '400', '500', '700'],
