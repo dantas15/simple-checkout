@@ -1,0 +1,17 @@
+{
+  "name": "@simple-checkout/schemas",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {},
+  "devDependencies": {
+    "@simple-checkout/eslint-config": "workspace:*",
+    "@simple-checkout/typescript-config": "workspace:*",
+    "@types/eslint": "^8.56.5",
+    "@types/node": "^20.11.24",
+    "@typescript-eslint/parser": "^7.1.0",
+    "typescript": "^5.3.3"
+  }
+}

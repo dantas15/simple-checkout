@@ -1,0 +1,5 @@
+{
+  "extends": "@simple-checkout/typescript-config/base.json",
+  "include": ["**/*.ts", "**/*.ts"],
+  "exclude": ["node_modules"]
+}

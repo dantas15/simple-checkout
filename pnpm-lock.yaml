@@ -121,6 +121,27 @@ importers:
         specifier: ^5.3.3
         version: 5.5.3
 
+  packages/schemas:
+    devDependencies:
+      '@simple-checkout/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@simple-checkout/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/eslint':
+        specifier: ^8.56.5
+        version: 8.56.10
+      '@types/node':
+        specifier: ^20.11.24
+        version: 20.14.10
+      '@typescript-eslint/parser':
+        specifier: ^7.1.0
+        version: 7.16.0(eslint@8.57.0)(typescript@5.5.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.5.3
+
   packages/typescript-config: {}
 
   packages/ui:
