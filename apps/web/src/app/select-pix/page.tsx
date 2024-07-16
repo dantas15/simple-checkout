@@ -47,8 +47,7 @@ export default function SelectPix() {
     amount: amountFromContext,
   } = usePaymentContext();
 
-  if (isPaymentLoading && !amountFromContext) {
-    console.log({ paymentStatus });
+  if (!isPaymentLoading && !amountFromContext) {
     router.replace(fallbackRoutesFromStatus['3-amount-specified']);
   }
 
