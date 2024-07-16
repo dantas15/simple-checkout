@@ -12,6 +12,7 @@ type Nullable<T> = T | null | undefined;
 
 /* eslint-disable no-unused-vars */
 export type PaymentContextType = {
+  cet: number;
   paymentStatus: PaymentStatus;
   user: Nullable<User>;
   updateUser: (data: User) => Promise<void>;
@@ -93,6 +94,7 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
   return (
     <PaymentContext.Provider
       value={{
+        cet: 5,
         paymentStatus,
         user,
         amount,
