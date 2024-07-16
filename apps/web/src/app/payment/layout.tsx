@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function PaymentLaoyout({ children }: Props) {
-  const { amount, paymentStatus } = usePaymentContext();
+  const { amount, paymentStatus, cet } = usePaymentContext();
 
   const pixAmount = (amount?.amount ?? 0) / 2;
   const creditCardAmount = (amount?.amount ?? 0) - pixAmount;
@@ -24,6 +24,7 @@ export default function PaymentLaoyout({ children }: Props) {
       {children}
       <PaymentInfo
         identifier="123"
+        cet={cet}
         firstAmount={pixAmount}
         secondAmount={creditCardAmount}
         completedSteps={completedSteps}

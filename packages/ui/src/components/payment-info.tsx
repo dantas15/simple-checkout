@@ -20,17 +20,20 @@ type Props = {
   identifier: string;
   firstAmount: number;
   secondAmount: number;
+  cet: number;
   activeStep?: PaymentTypes;
   completedSteps: PaymentTypes[];
 };
 
 export function PaymentInfo({
   identifier,
+  cet,
   firstAmount,
   secondAmount,
   activeStep,
   completedSteps,
 }: Props) {
+  const cetPercentage = cet / 100;
   return (
     <>
       <Stack pt={4} alignItems="center">
@@ -68,6 +71,18 @@ export function PaymentInfo({
             R${secondAmount}
           </Typography>
         </Stack>
+      </Stack>
+      <Divider />
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        p={2}
+      >
+        <Typography variant="body2">CET: {cetPercentage}</Typography>
+        <Typography variant="body2">
+          Total: R${(firstAmount + secondAmount).toFixed(2)}
+        </Typography>
       </Stack>
       <Divider />
       <FAQ />

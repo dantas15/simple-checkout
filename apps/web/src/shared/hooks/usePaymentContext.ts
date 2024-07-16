@@ -18,6 +18,7 @@ const paymentContextNullValues: PaymentContextType = {
   updatePixPayment: async () => {},
   clearData: () => {},
   isPaymentLoading: true,
+  cet: 5,
 };
 
 export function usePaymentContext(): PaymentContextType {
