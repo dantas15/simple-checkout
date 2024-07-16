@@ -1,31 +1,21 @@
-import { Box, BoxProps } from '@mui/material';
 import { ReactNode } from 'react';
-import { minContentHeight } from '../min-content-height';
+import { ScreenHeightStack } from './screen-height-stack';
 
 type Props = {
   alignCenter?: boolean;
   children: ReactNode;
-} & BoxProps;
-
-const centerStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
 };
 
-export function MainContent({ children, alignCenter, sx, ...props }: Props) {
-  const additionalStyles = alignCenter ? { ...centerStyles, ...sx } : sx;
+export function MainContent({ children, alignCenter }: Props) {
+  const alignCenterOrUndefined = alignCenter ? 'center' : undefined;
   return (
-    <Box
+    <ScreenHeightStack
       py="2rem"
       component="main"
-      {...props}
-      sx={{
-        ...additionalStyles,
-        minHeight: minContentHeight,
-      }}
+      justifyContent={alignCenterOrUndefined}
+      alignItems={alignCenterOrUndefined}
     >
       {children}
-    </Box>
+    </ScreenHeightStack>
   );
 }
