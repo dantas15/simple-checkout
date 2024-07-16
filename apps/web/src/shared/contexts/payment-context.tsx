@@ -25,7 +25,7 @@ export type PaymentContextType = {
   updatePixPreferences: (data: PixPreference) => Promise<void>;
   updatePixPayment: () => Promise<void>;
   clearData: () => void | Promise<void>;
-  isLoading: boolean;
+  isPaymentLoading: boolean;
 };
 
 export const PaymentContext = createContext<PaymentContextType | undefined>(
@@ -53,46 +53,37 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
   ) => {
     setPaymentStatus(newStatus);
     if (redirectTo) {
-      router.push(redirectTo);
+      router.replace(redirectTo);
     }
   };
 
   const updateUser = async (data: User) => {
     setPaymentStatus('pending');
     setUser(data);
-    setTimeout(() => {
-      updatePaymentStatus('2-user-specified');
-    }, 500);
+    updatePaymentStatus('2-user-specified');
   };
   const updateAmount = async (data: Amount) => {
     setPaymentStatus('pending');
     setAmount(data);
-    setTimeout(() => {
-      updatePaymentStatus('3-amount-specified');
-    }, 500);
+    updatePaymentStatus('3-amount-specified');
   };
   const updatePixPreferences = async (data: PixPreference) => {
     setPaymentStatus('pending');
     setPixPreference(data);
-    setTimeout(() => {
-      updatePaymentStatus('4-pix-type-selected');
-    }, 500);
+    updatePaymentStatus('4-pix-type-selected');
   };
   const updatePixPayment = async () => {
     setPaymentStatus('pending');
-    setTimeout(() => {
-      updatePaymentStatus('5-pix-confirmed');
-    }, 500);
+    updatePaymentStatus('5-pix-confirmed');
   };
   const updateCreditCard = async (data: CreditCard) => {
     setPaymentStatus('pending');
-    setTimeout(() => {
-      setCreditCard(data);
-      updatePaymentStatus('6-success');
-    }, 500);
+    setCreditCard(data);
+    updatePaymentStatus('6-success');
   };
 
   const clearData = () => {
+    setPaymentStatus('pending');
     setUser(null);
     setAmount(null);
     setCreditCard(null);
@@ -113,7 +104,7 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
         pixPreference,
         updatePixPreferences,
         updatePixPayment,
-        isLoading: paymentStatus === 'pending',
+        isPaymentLoading: paymentStatus === 'pending',
         clearData,
       }}
     >
