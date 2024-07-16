@@ -30,8 +30,8 @@ export default function RootLayout({
       <body className={font.className}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
+            <CssBaseline />
             <ClientProviders>
-              <CssBaseline />
               <MainWrapper>
                 <Suspense fallback={<Loading />}>{children}</Suspense>
               </MainWrapper>

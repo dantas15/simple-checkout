@@ -1,18 +1,16 @@
 'use client';
 
-import { createContext, ReactNode, useEffect, useState } from 'react';
-import { userSchema, type User } from '../schemas/user-schema';
-import { amountSchema, type Amount } from '../schemas/amount-schema';
-import {
-  creditCardSchema,
-  type CreditCard,
-} from '../schemas/credit-card-schema';
+import { createContext, ReactNode, useState } from 'react';
+import { type User } from '../schemas/user-schema';
+import { type Amount } from '../schemas/amount-schema';
+import { type CreditCard } from '../schemas/credit-card-schema';
 import { useRouter } from 'next/navigation';
 import type { PaymentStatus } from '../schemas/payment-status-schema';
 import { PixPreference } from '../schemas/pix-preference-schema';
 
 type Nullable<T> = T | null | undefined;
 
+/* eslint-disable no-unused-vars */
 export type PaymentContextType = {
   paymentStatus: PaymentStatus;
   user: Nullable<User>;
@@ -25,8 +23,9 @@ export type PaymentContextType = {
   updatePixPreferences: (data: PixPreference) => Promise<void>;
   updatePixPayment: () => Promise<void>;
   clearData: () => void | Promise<void>;
-  isLoading: boolean;
+  isPaymentLoading: boolean;
 };
+/* eslint-enable no-unused-vars */
 
 export const PaymentContext = createContext<PaymentContextType | undefined>(
   undefined
@@ -53,40 +52,37 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
   ) => {
     setPaymentStatus(newStatus);
     if (redirectTo) {
-      router.push(redirectTo);
+      router.replace(redirectTo);
     }
   };
 
   const updateUser = async (data: User) => {
     setPaymentStatus('pending');
     setUser(data);
-    updatePaymentStatus('2-user-specified', '/amount');
+    updatePaymentStatus('2-user-specified');
   };
   const updateAmount = async (data: Amount) => {
     setPaymentStatus('pending');
     setAmount(data);
-    updatePaymentStatus('3-amount-specified', '/select-pix');
+    updatePaymentStatus('3-amount-specified');
   };
   const updatePixPreferences = async (data: PixPreference) => {
     setPaymentStatus('pending');
     setPixPreference(data);
-    updatePaymentStatus('4-pix-type-selected', '/payment/pix');
+    updatePaymentStatus('4-pix-type-selected');
   };
   const updatePixPayment = async () => {
     setPaymentStatus('pending');
-    await setTimeout(async () => {
-      updatePaymentStatus('5-pix-confirmed', '/payment/credit-card');
-    }, 500);
+    updatePaymentStatus('5-pix-confirmed');
   };
   const updateCreditCard = async (data: CreditCard) => {
     setPaymentStatus('pending');
-    await setTimeout(async () => {
-      setCreditCard(data);
-      updatePaymentStatus('6-success', '/success');
-    }, 500);
+    setCreditCard(data);
+    updatePaymentStatus('6-success');
   };
 
   const clearData = () => {
+    setPaymentStatus('pending');
     setUser(null);
     setAmount(null);
     setCreditCard(null);
@@ -107,7 +103,7 @@ export function PaymentProvider({ children }: PaymentProviderProps) {
         pixPreference,
         updatePixPreferences,
         updatePixPayment,
-        isLoading: paymentStatus === 'pending',
+        isPaymentLoading: paymentStatus === 'pending',
         clearData,
       }}
     >

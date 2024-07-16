@@ -6,11 +6,23 @@ import {
   MainContent,
 } from '@simple-checkout/ui/components';
 import { usePaymentContext } from '../../shared/hooks/usePaymentContext';
+import { useRouter } from 'next/navigation';
+import { fallbackRoutesFromStatus } from '../../utils/fallback-routes';
 
 export default function Success() {
-  const { clearData } = usePaymentContext();
-  const handleOnClick = () => {
-    clearData();
+  const router = useRouter();
+  const { clearData, paymentStatus, creditCard } = usePaymentContext();
+
+  if (
+    paymentStatus !== '6-success' ||
+    (paymentStatus === '6-success' && !creditCard)
+  ) {
+    router.replace(fallbackRoutesFromStatus['6-success']);
+  }
+
+  const handleOnClick = async () => {
+    await clearData();
+    router.push('/');
   };
   return (
     <MainContent alignCenter>

@@ -7,8 +7,10 @@ import { MainContent, SubmitButton } from '@simple-checkout/ui/components';
 import { useForm } from 'react-hook-form';
 import { type User, userSchema } from '../shared/schemas/user-schema';
 import { usePaymentContext } from '../shared/hooks/usePaymentContext';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
   const { updateUser } = usePaymentContext();
 
   const form = useForm<User>({
@@ -16,7 +18,8 @@ export default function Home() {
   });
 
   const handleOnSubmit = async (data: User) => {
-    updateUser(data);
+    await updateUser(data);
+    router.push('/amount');
   };
 
   return (

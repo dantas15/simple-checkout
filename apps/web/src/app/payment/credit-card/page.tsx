@@ -12,6 +12,9 @@ import {
 } from '../../../shared/schemas/credit-card-schema';
 import { usePaymentContext } from '../../../shared/hooks/usePaymentContext';
 import { SelectInstallments } from './components/select-installments';
+import { useRouter } from 'next/navigation';
+import { fallbackRoutesFromStatus } from '../../../utils/fallback-routes';
+import { useState } from 'react';
 
 type Installment = {
   value: number;
@@ -33,6 +36,19 @@ const fetchMockInstallments = (transactionAmount: number): Installment[] => {
 };
 
 export default function CreditCard() {
+  const router = useRouter();
+
+  const [isFormLoading, setIsFormLoading] = useState(false);
+
+  const {
+    user,
+    amount,
+    isPaymentLoading,
+    paymentStatus,
+    creditCard,
+    updateCreditCard,
+  } = usePaymentContext();
+
   const form = useForm<CreditCardType>({
     resolver: zodResolver(creditCardSchema),
     defaultValues: {
@@ -40,13 +56,21 @@ export default function CreditCard() {
     },
   });
 
-  const { user, amount, isLoading, updateCreditCard } = usePaymentContext();
+  if (
+    (!isPaymentLoading && paymentStatus !== '5-pix-confirmed') ||
+    (paymentStatus === '6-success' && !creditCard)
+  ) {
+    router.replace(fallbackRoutesFromStatus['5-pix-confirmed']);
+  }
 
   const name = user?.name ?? '';
   const amountInCents = amount?.amount ?? 0;
 
-  const handleOnSubmit = (data: CreditCardType) => {
-    updateCreditCard(data);
+  const handleOnSubmit = async (data: CreditCardType) => {
+    setIsFormLoading(true);
+    await updateCreditCard(data);
+    setIsFormLoading(false);
+    router.push('/success');
   };
 
   const availableInstallments = fetchMockInstallments(amountInCents);
@@ -106,7 +130,7 @@ export default function CreditCard() {
           form={form}
           installmentOptions={availableInstallments}
         />
-        <SubmitButton color="secondary" fullWidth isLoading={isLoading}>
+        <SubmitButton color="secondary" fullWidth isLoading={isFormLoading}>
           Pagar
         </SubmitButton>
       </Stack>
